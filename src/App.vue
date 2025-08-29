@@ -1,12 +1,9 @@
 <script setup lang="ts">
 const i = {
-  tset:
-    "iii",
-  try:
-    "123",
+  tset: "iii",
+  try: "123",
 };
-console.log(
-  i);
+console.log(i);
 </script>
 
 <template>
