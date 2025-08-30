@@ -1,0 +1,142 @@
+// =============== 现代 Reset ===============
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  // 让 rem = 16px，方便计算
+  font-size: 16px;
+  // 平滑滚动
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  // 行高 1 会导致文字重叠，改为 1.5 并继承
+  line-height: 1.5;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+// 现代浏览器已忽略，保留 img 基线修复
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// 去掉列表样式
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// 去掉标题默认 margin
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+// 去掉斜体
+address,
+cite,
+dfn,
+em,
+var {
+  font-style: normal;
+}
+
+// 统一表单样式
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+// 按钮 focus 样式
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+// 去掉所有 focus 的默认 outline（但保留键盘聚焦）
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// 去掉输入框的内置 UI
+input[type="number"],
+input[type="search"] {
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+// 占位符统一字重
+input::placeholder,
+textarea::placeholder {
+  font-weight: 400;
+  color: #6b7280;
+}
+
+// 去掉 textarea 手柄
+textarea {
+  resize: vertical;
+}
+
+// 表格
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// 链接
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+// 去掉 iOS 点击高亮（可选）
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
