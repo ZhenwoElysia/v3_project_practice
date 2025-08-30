@@ -1,8 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'home'
-})
-
+  name: "master-home",
+});
 </script>
 
 <template>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineOptions({ name: 'Login' })
+defineOptions({
+  name: "master-login",
+});
 </script>
 
 <template>

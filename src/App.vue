@@ -1,14 +1,13 @@
 <script setup lang="ts">
-
-defineOptions({ name: 'App' })
-import { RouterView } from 'vue-router';
-import { ElButton } from 'element-plus';
+defineOptions({ name: "App" });
+import { RouterView } from "vue-router";
+import { ElButton } from "element-plus";
 </script>
 <template>
-  <router-link to='/Home'>
+  <router-link to="/Home">
     <ElButton>Home</ElButton>
   </router-link>
-  <router-link to='/Login'>
+  <router-link to="/Login">
     <ElButton>Login</ElButton>
   </router-link>
 

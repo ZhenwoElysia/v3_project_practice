@@ -6,6 +6,6 @@ const API = {
   INFO_URL: "/user/info",
 } as const;
 export const reqLogin = (data: loginType) =>
-  http.post<any, retrunLoginType>(API.LOGIN_URL, data);
-export const reqUerInfo = (data: any) =>
-  http.post<any, retrunResponseType>(API.INFO_URL, data);
+  http.post<object, retrunLoginType>(API.LOGIN_URL, data);
+export const reqUerInfo = (data: object) =>
+  http.post<object, retrunResponseType>(API.INFO_URL, data);
