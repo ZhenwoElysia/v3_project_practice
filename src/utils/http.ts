@@ -10,7 +10,6 @@ const request = axios.create({
 request.interceptors.request.use((config) => {
   //请求头config.headers,给服务器端携带公共参数
   //必须返回配置对象
-  console.log(config);
   return config;
 });
 //给request实例添加响应拦截器
@@ -52,6 +51,6 @@ request.interceptors.response.use(
       message,
     });
     return Promise.reject(error);
-  },
+  }
 );
 export default request;

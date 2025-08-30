@@ -1,20 +1,18 @@
 <script setup lang="ts">
-//引入图标组件
-import { Search } from "@element-plus/icons-vue";
+
+defineOptions({ name: 'App' })
+import { RouterView } from 'vue-router';
+import { ElButton } from 'element-plus';
 </script>
 <template>
-  <el-button type="primary" :icon="Search">awd</el-button>
-  <SvgIcon name="game" style="width: 36px" color="rgb(196, 183, 215)"></SvgIcon>
-  <Test></Test>
-  <div>
-    <h1>ppp</h1>
-  </div>
+  <router-link to='/Home'>
+    <ElButton>Home</ElButton>
+  </router-link>
+  <router-link to='/Login'>
+    <ElButton>Login</ElButton>
+  </router-link>
+
+  <RouterView></RouterView>
 </template>
 
-<style scoped lang="scss">
-div {
-  h1 {
-    color: red;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

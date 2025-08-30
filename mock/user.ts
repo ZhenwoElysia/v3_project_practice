@@ -4,9 +4,10 @@ function createUser() {
     {
       userId: 1,
       avator: "//url",
-      usename: "admin",
+      username: "admin",
       password: "111111",
       desc: "平台管理员",
+      roles: ["平台管理员"],
       buttons: ["cuser.detail"],
       routes: ["home"],
       token: "Admin Token",
@@ -14,7 +15,7 @@ function createUser() {
     {
       userId: 2,
       avator: "//url",
-      usename: "system",
+      username: "system",
       password: "111111",
       desc: "系统管理员",
       buttons: ["cuser.detail", "cuser.user"],
@@ -29,21 +30,21 @@ export default [
     url: "/api/user/login",
     method: "post",
     response: ({ body }) => {
-      const { userName, password } = body;
+      const { username, password } = body;
       //检查用户名和密码
       const checkUser = createUser().find(
-        (item) => item.userName === userName && item.password === password,
+        (item) => item.username === username && item.password === password
       );
       //如果不存在该用户
       if (!checkUser) {
         return {
-          code: "201",
+          code: 201,
           data: { massage: "账号或密码不正确" },
         };
       }
       //存在用户
       const { token } = checkUser;
-      return { code: "200", data: { token } };
+      return { code: 200, data: { token } };
     },
   },
   //获取用户信息
@@ -55,12 +56,12 @@ export default [
       const checkUser = createUser().find((item) => item.token === token);
       if (!checkUser) {
         return {
-          code: "201",
+          code: 201,
           data: { massage: "账号或密码不正确" },
         };
       }
       //存在用户
-      return { code: "200", data: { token } };
+      return { code: 200, data: { checkUser } };
     },
   },
 ];

@@ -6,6 +6,8 @@
   ],
   "compilerOptions": {
     "types": ["element-plus/global"],
+    //enum name{}
+    //
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

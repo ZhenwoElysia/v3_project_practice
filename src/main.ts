@@ -3,6 +3,9 @@ import { createApp } from "vue";
 import App from "./App.vue";
 const app = createApp(App);
 
+//引入路由
+import router from "./router";
+app.use(router);
 //svg插件的配置代码
 //@ts-expect-error  ts类型无法识别该文件
 import "virtual:svg-icons-register";
