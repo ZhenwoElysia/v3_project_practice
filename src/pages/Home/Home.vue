@@ -2,8 +2,7 @@
 defineOptions({
   name: "master-home",
 });
-defineProps(['token'])
-
+defineProps(["token"]);
 </script>
 
 <template>

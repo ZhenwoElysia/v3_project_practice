@@ -33,7 +33,7 @@ export default [
       const { username, password } = body;
       //检查用户名和密码
       const checkUser = createUser().find(
-        (item) => item.username === username && item.password === password
+        (item) => item.username === username && item.password === password,
       );
       //如果不存在该用户
       if (!checkUser) {
