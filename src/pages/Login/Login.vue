@@ -4,38 +4,56 @@ import { reactive, ref } from "vue";
 import useUserStore from "@/store/modules/user";
 import type { loginType, retrunLoginType } from "@/api/user/type";
 import { useRouter } from "vue-router";
-import { ElMessage } from "element-plus";
+import { ElNotification } from "element-plus";
+import { getHour } from "@/utils/time";
 const router = useRouter();
 defineOptions({
   name: "master-login",
 });
 let isLoading = ref(false);
 
+//登录
 const userStore = useUserStore();
-const user: loginType = reactive({
+const user = reactive<loginType>({
   username: "admin",
   password: "111111",
 });
+//先进行检查
+//需要规则的数据//对表单字段进行检查
+
+const rules = {
+  username: [{ min: 5, message: "用户名至少有五位", trigger: "blur" }],
+  password: [{ min: 6, message: "密码长度至少为6位", trigger: "change" }],
+};
+const loginForms = ref();
+
 const checkUser = async () => {
   isLoading.value = !isLoading.value;
+
+  //发送请求前保证字段符合
+  await loginForms.value.validate();
   //请求登录
   try {
     //登录成功
     const result = await userStore.userLogin(user);
-    console.log(result);
+    //{code:200,data{message:'登录成功',token:xxx}}
     //弹出提示
-    ElMessage({
+    const nowTimeStr = getHour(); //获取当前时间(早中晚)
+    ElNotification({
       type: "success",
       message: result.data.message,
+      title: "hi，" + nowTimeStr + "好",
     });
     //跳转到home
     router.push({
       name: "home",
-      params: {},
+      params: {
+        token: result.data.token,
+      },
     });
   } catch (err) {
     const error = err as retrunLoginType;
-    ElMessage({
+    ElNotification({
       type: "error",
       message: error.data.message,
     });
@@ -49,13 +67,19 @@ const checkUser = async () => {
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form action="" class="login_form">
+        <el-form
+          action=""
+          class="login_form"
+          :model="user"
+          :rules="rules"
+          ref="loginForms"
+        >
           <h1>Hello</h1>
           <h3>欢迎来到硅谷甄选</h3>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="user.username"> </el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               type="password"
               :prefix-icon="Lock"

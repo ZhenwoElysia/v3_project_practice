@@ -17,7 +17,7 @@ const useUserStore = defineStore("user", {
       if (result.code === 200) {
         //存储token
         this.token = result.data.token;
-        localStorage.setItem("TOKEN", this.token);
+        localStorage.setItem("TOKEN", this.token as string);
         return result;
       } else {
         return Promise.reject(result);

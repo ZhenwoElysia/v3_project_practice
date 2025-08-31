@@ -13,7 +13,7 @@ interface userInfo {
 }
 
 interface loginDataType {
-  token: string;
+  token: string | null;
   message: string;
 }
 interface responseDataType {
