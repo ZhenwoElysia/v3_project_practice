@@ -33,18 +33,21 @@ export default [
       const { username, password } = body;
       //检查用户名和密码
       const checkUser = createUser().find(
-        (item) => item.username === username && item.password === password,
+        (item) => item.username === username && item.password === password
       );
       //如果不存在该用户
       if (!checkUser) {
         return {
           code: 201,
-          data: { massage: "账号或密码不正确" },
+          data: { message: "账号或密码不正确" },
         };
       }
       //存在用户
       const { token } = checkUser;
-      return { code: 200, data: { token } };
+      return {
+        code: 200,
+        data: { token, message: "登录成功" },
+      };
     },
   },
   //获取用户信息
@@ -57,7 +60,7 @@ export default [
       if (!checkUser) {
         return {
           code: 201,
-          data: { massage: "账号或密码不正确" },
+          data: { message: "账号或密码不正确" },
         };
       }
       //存在用户

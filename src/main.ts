@@ -3,9 +3,6 @@ import { createApp } from "vue";
 import App from "./App.vue";
 const app = createApp(App);
 
-//引入路由
-import router from "./router";
-app.use(router);
 //svg插件的配置代码
 //@ts-expect-error  ts类型无法识别该文件
 import "virtual:svg-icons-register";
@@ -24,5 +21,13 @@ import register from "@/components/globals/index.ts";
 app.use(register);
 //引入样式
 import "@/style/index.scss";
+
+//引入路由
+import router from "./router";
+app.use(router);
+
+//引入pinia
+import pinia from "@/store/index";
+app.use(pinia);
 
 app.mount("#app");

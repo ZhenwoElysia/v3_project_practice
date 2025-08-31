@@ -14,6 +14,7 @@ interface userInfo {
 
 interface loginDataType {
   token: string;
+  message: string;
 }
 interface responseDataType {
   checkUser: userInfo;

@@ -5,6 +5,7 @@ const API = {
   LOGIN_URL: "/user/login",
   INFO_URL: "/user/info",
 } as const;
+//登录的接口
 export const reqLogin = (data: loginType) =>
   http.post<object, retrunLoginType>(API.LOGIN_URL, data);
 export const reqUerInfo = (data: object) =>

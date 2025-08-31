@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ name: '404-wrong' })
+defineOptions({ name: "404-wrong" });
 </script>
 
 <template>

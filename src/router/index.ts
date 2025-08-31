@@ -1,29 +1,30 @@
 import type { RouteRecordRaw } from "vue-router";
 import { createRouter, createWebHistory } from "vue-router";
 //路由
-import Home from "@/pages/Home/Home.vue";
-import Login from "@/pages/Login/Login.vue";
-import badFound from "@/pages/404/404.vue";
 const routes: RouteRecordRaw[] = [
   {
-    path: "/",
-    component: Home,
+    //           :token占位，表示该value的key作为params
+    path: "/Home/",
+    component: () => import("@/pages/Home/Home.vue"),
     name: "home",
+
+    //将路由收到的params参数作为prop传入组件
+    props: true,
     children: [],
   },
   {
     path: "/Login",
-    component: Login,
+    component: () => import("@/pages/Login/Login.vue"),
     name: "login",
   },
   {
     path: "/404",
-    component: badFound,
+    component: () => import("@/pages/404/404.vue"),
     name: "404",
   },
   {
     path: "/:pathMatch(.*)*",
-    redirect: "/",
+    redirect: "/Login",
   },
 ];
 //创建路由器
