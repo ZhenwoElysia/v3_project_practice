@@ -17,7 +17,7 @@ app.use(ElementPlus, {
 });
 
 //引入自定义插件，注册全局组件
-import register from "@/components/globals/index.ts";
+import register from "@/compoments/globals";
 app.use(register);
 //引入样式
 import "@/style/index.scss";

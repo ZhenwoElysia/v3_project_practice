@@ -20,10 +20,32 @@ const user = reactive<loginType>({
 });
 //先进行检查
 //需要规则的数据//对表单字段进行检查
-
+//                     校验数组对象，得到的值              放行函数，通过调用放行
+const checkUserName = (_rules: object[], value: string, callBack: (error?: string | Error) => void) => {
+  if (/^[A-Za-z0-9]{5,15}$/.test(value)) {
+    callBack();
+  } else {
+    callBack("用户名长度大于等于5小于16且含有数字和字母");
+  }
+};
+const checkPassword = (_rules: object[], value: string, callBack: (error?: string | Error) => void) => {
+  if (/^[A-Za-z0-9._'`@#&*]{6,15}$/.test(value)) {
+    callBack();
+  } else {
+    callBack(
+      "密码长度必须大于等于六位小于十六位，只能含有数字大小写字母和符号._'`@#&*",
+    );
+  }
+};
 const rules = {
-  username: [{ min: 5, message: "用户名至少有五位", trigger: "blur" }],
-  password: [{ min: 6, message: "密码长度至少为6位", trigger: "change" }],
+  username: [
+    // { min: 5, message: "用户名至少有五位", trigger: "blur" }//校验规则
+    { validator: checkUserName, trigger: "change" },
+  ],
+  password: [
+    // { min: 6, message: "密码长度至少为6位", trigger: "change" }
+    { validator: checkPassword, trigger: "change" },
+  ],
 };
 const loginForms = ref();
 
@@ -67,34 +89,18 @@ const checkUser = async () => {
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form
-          action=""
-          class="login_form"
-          :model="user"
-          :rules="rules"
-          ref="loginForms"
-        >
+        <el-form action="" class="login_form" :model="user" :rules="rules" ref="loginForms">
           <h1>Hello</h1>
           <h3>欢迎来到硅谷甄选</h3>
           <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="user.username"> </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              type="password"
-              :prefix-icon="Lock"
-              v-model="user.password"
-              show-password
-            >
+            <el-input type="password" :prefix-icon="Lock" v-model="user.password" show-password>
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button
-              type="primary"
-              :loading="isLoading"
-              class="login_btn"
-              @click="checkUser"
-            >
+            <el-button type="primary" :loading="isLoading" class="login_btn" @click="checkUser">
               登录
             </el-button>
           </el-form-item>

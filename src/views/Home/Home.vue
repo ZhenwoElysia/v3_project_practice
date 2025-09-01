@@ -1,0 +1,56 @@
+<script setup lang="ts">
+defineProps(["token"]);
+defineOptions({
+  name: "view-home",
+});
+import vMenu from "../menu/menu.vue";
+</script>
+
+<template>
+  <div class="home_container">
+    <!-- 左侧菜单 -->
+    <div class="home_menu">
+      <vMenu></vMenu>
+    </div>
+    <!-- 顶部导航 -->
+    <div class="home_header">qwe</div>
+    <!-- 展示区 -->
+    <div class="home_views">
+      <p style="height: 10000px; background-color: pink"></p>
+    </div>
+  </div>
+</template>
+
+<style lang="scss">
+.home_container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  .home_menu {
+    width: 250px;
+    height: 100vh;
+    background-color: rgb(0, 21, 43);
+  }
+
+  .home_header {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: calc(100vw - 250px);
+    height: 50px;
+    background-color: rgb(214, 207, 226);
+  }
+
+  .home_views {
+    position: absolute;
+    top: 50px;
+    left: 250px;
+    width: calc(100vw - 250px);
+    height: calc(100vh - 50px);
+    padding: 20px;
+    background-color: rgb(186, 174, 204);
+    overflow: auto;
+  }
+}
+</style>
