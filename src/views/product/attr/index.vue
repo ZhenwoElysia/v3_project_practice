@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'product-attr'
-})
+  name: "product-attr",
+});
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'main-screen'
-})
+  name: "main-screen",
+});
 </script>
 
 <template>

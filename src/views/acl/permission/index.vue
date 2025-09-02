@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'acl-permission'
-})
+  name: "acl-permission",
+});
 </script>
 <template>
   <h1>菜单管理</h1>

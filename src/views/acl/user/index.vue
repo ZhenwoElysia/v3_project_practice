@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'acl-user'
-})
+  name: "acl-user",
+});
 </script>
 
 <template>
