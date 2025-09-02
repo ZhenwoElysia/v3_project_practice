@@ -3,13 +3,13 @@ defineOptions({
   name: "view-menu",
 });
 import logo from "@/views/menu/logo/logo.vue";
-import menuDetails from '@/views/menu/details/menu-details.vue'
+import menuDetails from "@/views/menu/details/menu-details.vue";
 //pinia的user仓库,来获取router
-import useUserStore from '@/store/modules/user.ts';
-const userStore = useUserStore()
-import { reactive } from 'vue';
+import useUserStore from "@/store/modules/user.ts";
+const userStore = useUserStore();
+import { reactive } from "vue";
 //拿到路由
-const userRoute = reactive(userStore.menuRoutes.options.routes)
+const userRoute = reactive(userStore.menuRoutes.options.routes);
 </script>
 
 <template>

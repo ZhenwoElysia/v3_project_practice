@@ -9,7 +9,7 @@ defineOptions({
     <img src="@/../public/logo.png" alt="" />
     <h2>
       甄选运营
-      <br>
+      <br />
       (<a href="https://github.com/ZhenwoElysia">空白</a>版)
     </h2>
   </div>
@@ -20,7 +20,7 @@ div {
   display: flex;
   width: 100%;
   height: 10vh;
-  color: #FF6C94;
+  color: #ff6c94;
   padding: 10px;
   align-items: center;
 

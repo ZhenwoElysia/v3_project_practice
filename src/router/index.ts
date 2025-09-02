@@ -10,25 +10,59 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: "首页",
       isShowInMenu: true,
+      iconName: "HomeFilled", //菜单文字左侧的图标
     },
     //将路由收到的params参数作为prop传入组件
     props: true,
     children: [
       {
-        path: "/:token",
-        component: () => import("@/views/Home/Home.vue"),
+        path: "/:token/0",
+        component: () => import("@/views/Home/Home.vue"), //测试用，防报错
         meta: {
           title: "测试用",
           isShowInMenu: true,
+          iconName: "HomeFilled",
         },
+        children: [
+          {
+            path: "/:token/2",
+            component: () => import("@/views/Home/Home.vue"),
+            meta: {
+              title: "测试用",
+              isShowInMenu: true,
+              iconName: "HomeFilled",
+            },
+          },
+        ],
       },
       {
-        path: "/:token",
+        path: "/:token/1",
         component: () => import("@/views/Home/Home.vue"),
         meta: {
           title: "测试用",
           isShowInMenu: true,
+          iconName: "HomeFilled",
         },
+        children: [
+          {
+            path: "/:token/2",
+            component: () => import("@/views/Home/Home.vue"),
+            meta: {
+              title: "测试用",
+              isShowInMenu: true,
+              iconName: "HomeFilled",
+            },
+          },
+          {
+            path: "/:token/3",
+            component: () => import("@/views/Home/Home.vue"),
+            meta: {
+              title: "测试用",
+              isShowInMenu: true,
+              iconName: "HomeFilled",
+            },
+          },
+        ],
       },
     ],
   },
@@ -38,7 +72,8 @@ const routes: RouteRecordRaw[] = [
     name: "login",
     meta: {
       title: "登录页",
-      isShowInMenu: false,
+      isShowInMenu: true,
+      iconName: "HomeFilled",
     },
   },
   {
@@ -47,7 +82,8 @@ const routes: RouteRecordRaw[] = [
     name: "404",
     meta: {
       title: "404页面",
-      isShowInMenu: false,
+      isShowInMenu: true,
+      iconName: "HomeFilled",
     },
   },
   {
@@ -55,7 +91,8 @@ const routes: RouteRecordRaw[] = [
     redirect: "/Login",
     meta: {
       title: "测试用",
-      isShowInMenu: false,
+      isShowInMenu: true,
+      iconName: "HomeFilled",
     },
   },
 ];

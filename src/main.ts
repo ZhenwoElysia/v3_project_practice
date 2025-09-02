@@ -10,6 +10,11 @@ import "virtual:svg-icons-register";
 //引入ElementPlus
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
+//引入Element的所有图标
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component);
+}
 //配置elementui 的中文
 import { zhCn } from "element-plus/es/locales.mjs";
 app.use(ElementPlus, {
