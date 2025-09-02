@@ -8,9 +8,9 @@ defineOptions({
   <div>
     <img src="@/../public/logo.png" alt="" />
     <h2>
-      甄选运营(
-      <a href="www,github">空白</a>
-      版)
+      甄选运营
+      <br>
+      (<a href="https://github.com/ZhenwoElysia">空白</a>版)
     </h2>
   </div>
 </template>
@@ -19,11 +19,14 @@ defineOptions({
 div {
   display: flex;
   width: 100%;
-  color: rgb(156, 108, 255);
-  padding: 5px;
+  height: 10vh;
+  color: #FF6C94;
+  padding: 10px;
+  align-items: center;
 
   img {
     width: 25%;
+    margin-right: 10%;
   }
 
   h2 {

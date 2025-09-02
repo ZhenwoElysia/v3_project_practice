@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
 import { reqLogin } from "@/api/user";
 import type { loginType, retrunLoginType } from "@/api/user/type";
+import router from "@/router";
 const useUserStore = defineStore("user", {
   //储存数据
   state() {
     return {
       //获取token
       token: localStorage.getItem("TOKEN"), //用户的唯一标识
+      menuRoutes: router,
     };
   },
   //处理异步或者逻辑

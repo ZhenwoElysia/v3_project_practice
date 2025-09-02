@@ -30,7 +30,7 @@ import vMenu from "../menu/menu.vue";
   .home_menu {
     width: 250px;
     height: 100vh;
-    background-color: rgb(0, 21, 43);
+    background-color: rgb(41, 37, 41);
   }
 
   .home_header {
