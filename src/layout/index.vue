@@ -3,7 +3,7 @@ defineProps(["token"]);
 defineOptions({
   name: "view-home",
 });
-import vMenu from "../menu/menu.vue";
+import vMenu from "@/layout/menu/menu.vue";
 </script>
 
 <template>
@@ -16,7 +16,7 @@ import vMenu from "../menu/menu.vue";
     <div class="home_header">qwe</div>
     <!-- 展示区 -->
     <div class="home_views">
-      <p style="height: 10000px; background-color: pink"></p>
+      <router-view></router-view>
     </div>
   </div>
 </template>

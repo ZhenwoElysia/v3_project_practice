@@ -6,7 +6,7 @@ defineOptions({
 
 <template>
   <div>
-    <img src="@/../public/logo.png" alt="" />
+    <img src="@/assets/logos/logo.png" alt="" />
     <h2>
       甄选运营
       <br />

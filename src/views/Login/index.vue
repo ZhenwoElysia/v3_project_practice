@@ -76,13 +76,11 @@ const checkUser = async () => {
     });
     //跳转到home
     router.push({
-      name: "home",
-      params: {
-        token: result.data.token,
-      },
+      path: "/",
     });
   } catch (err) {
     const error = err as retrunLoginType;
+    console.log(err);
     ElNotification({
       type: "error",
       message: error.data.message,

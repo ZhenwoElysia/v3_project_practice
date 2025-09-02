@@ -2,8 +2,8 @@
 defineOptions({
   name: "view-menu",
 });
-import logo from "@/views/menu/logo/logo.vue";
-import menuDetails from "@/views/menu/details/menu-details.vue";
+import logo from "@/layout/menu/logo/logo.vue";
+import menuDetails from "@/layout/menu/details/menu-details.vue";
 //pinia的user仓库,来获取router
 import useUserStore from "@/store/modules/user.ts";
 const userStore = useUserStore();
