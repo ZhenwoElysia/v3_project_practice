@@ -15,7 +15,7 @@ const openeds = ref<string[]>([]);
 const activePath = ref(route.path);
 
 const updateOpeneds = () => {
-  const paths = route.path.split('/').filter(Boolean);
+  const paths = route.path.split("/").filter(Boolean);
   if (paths.length > 1) {
     openeds.value = ["/" + paths[0]];
   } else {
@@ -35,8 +35,13 @@ const userRoute = reactive(userStore.menuRoutes.options.routes);
   <div>
     <logo></logo>
     <el-scrollbar class="scrollbar">
-      <el-menu background-color="#292529" text-color="#ffffff" active-text-color="#baaecc" :active="activePath"
-        :default-openeds="openeds">
+      <el-menu
+        background-color="#292529"
+        text-color="#ffffff"
+        active-text-color="#baaecc"
+        :active="activePath"
+        :default-openeds="openeds"
+      >
         <!-- 利用props来传递参数,实现组件自己的递归 -->
         <menuDetails :userRoute="userRoute"></menuDetails>
       </el-menu>

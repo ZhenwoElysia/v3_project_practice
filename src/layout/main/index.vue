@@ -1,14 +1,14 @@
 <script setup lang="ts">
 defineOptions({
-  name: "MainLayout"
-})
+  name: "MainLayout",
+});
 </script>
 
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <!-- 渲染layout一级组件的子组件 -->
-      <component :is='Component' />
+      <component :is="Component" />
     </transition>
   </router-view>
 </template>

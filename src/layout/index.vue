@@ -6,7 +6,6 @@ defineProps(["token"]);
 defineOptions({
   name: "view-home",
 });
-
 </script>
 
 <template>
