@@ -8,21 +8,14 @@ interface MenuItemRegistered {
 }
 const router = useRouter();
 const goRoute = (vc: MenuItemRegistered) => {
-  //去掉最开始的  '/'
-  console.log(vc.index);
-
-  const routeName = vc.index.slice(1);
-  router.push({ name: routeName });
+  router.push({ name: vc.index });
 };
 //[{path:'xxx',compoment:xxx,chirldren:[{xxx}]}.{}]
 </script>
 <template>
   <template v-for="routeObj in userRoute" :key="routeObj.path">
     <!-- 如果存在路由有二级路由，用sub折叠菜单 -->
-    <el-sub-menu
-      v-if="routeObj.children && routeObj.children.length > 1"
-      :index="routeObj.path"
-    >
+    <el-sub-menu v-if="routeObj.children && routeObj.children.length > 1" :index="routeObj.path">
       <!-- 标题 -->
       <template #title>
         <el-icon v-if="routeObj.meta.iconName">
@@ -34,24 +27,18 @@ const goRoute = (vc: MenuItemRegistered) => {
       <menu-details :userRoute="routeObj.children"></menu-details>
     </el-sub-menu>
     <!-- 如果无子组件，且需要在页面显示 -->
-    <el-menu-item
-      v-if="!routeObj.children && routeObj.meta.isShowInMenu === true"
-      :index="routeObj.path"
-      @click="goRoute"
-    >
+    <el-menu-item v-if="!routeObj.children && routeObj.meta.isShowInMenu === true" :index="routeObj.path"
+      @click="goRoute">
       <el-icon>
         <component :is="routeObj.meta.iconName"></component>
       </el-icon>
       <span>{{ routeObj.meta.title }}</span>
     </el-menu-item>
-    <el-menu-item
-      v-if="
-        routeObj.children &&
-        routeObj.children.length === 1 &&
-        routeObj.children[0].meta.isShowInMenu === true
-      "
-      @click="goRoute"
-    >
+    <el-menu-item v-if="
+      routeObj.children &&
+      routeObj.children.length === 1 &&
+      routeObj.children[0].meta.isShowInMenu === true
+    " @click="goRoute">
       <el-icon>
         <component :is="routeObj.meta.iconName"></component>
       </el-icon>

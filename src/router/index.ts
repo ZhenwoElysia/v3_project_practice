@@ -5,11 +5,11 @@ const routes: RouteRecordRaw[] = [
   {
     //           占位，表示该value的key作为params
     path: "/",
-    component: () => import("@/layout/index.vue"),
     name: "Layout",
+    component: () => import("@/layout/index.vue"),
     meta: {
       title: "首页",
-      isShowInMenu: true,
+      isShowInMenu: true, //是否显示到左边菜单中，不写则为undifined
       iconName: "HomeFilled", //菜单文字左侧的图标
     },
     redirect: "/Home",
@@ -17,19 +17,28 @@ const routes: RouteRecordRaw[] = [
     //将路由收到的params参数作为prop传入组件
   },
   {
-    path: "/Login",
-    component: () => import("@/views/Login/index.vue"),
-    name: "Login",
+    path: "/Home",
+    name: "Home",
+    component: () => import("@/layout/index.vue"),
     meta: {
-      title: "登录页",
+      title: "首页",
       isShowInMenu: true,
       iconName: "HomeFilled",
     },
   },
   {
+    path: "/Login",
+    name: "Login",
+    component: () => import("@/views/Login/index.vue"),
+    meta: {
+      title: "登录页",
+      iconName: "HomeFilled",
+    },
+  },
+  {
     path: "/Screen",
-    component: () => import("@/views/screen/index.vue"),
     name: "Screen",
+    component: () => import("@/views/screen/index.vue"),
     meta: {
       title: "数据大屏",
       isShowInMenu: true,
@@ -39,6 +48,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/Aci",
     name: "Aci",
+    component: () => import("@/layout/index.vue"),
     meta: {
       title: "权限管理",
       isShowInMenu: true,
@@ -46,7 +56,7 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "/Role",
+        path: "Role",
         component: () => import("@/views/acl/role/index.vue"),
         name: "Role",
         meta: {
@@ -56,9 +66,9 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/User",
-        component: () => import("@/views/acl/user/index.vue"),
+        path: "User",
         name: "User",
+        component: () => import("@/views/acl/user/index.vue"),
         meta: {
           title: "角色管理",
           isShowInMenu: true,
@@ -66,9 +76,9 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/Permission",
-        component: () => import("@/views/acl/permission/index.vue"),
+        path: "Permission",
         name: "Permission",
+        component: () => import("@/views/acl/permission/index.vue"),
         meta: {
           title: "菜单管理",
           isShowInMenu: true,
@@ -80,6 +90,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/Product",
     name: "Product",
+    component: () => import("@/layout/index.vue"),
     meta: {
       title: "商品管理",
       isShowInMenu: true,
@@ -87,9 +98,9 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "/Attr",
-        component: () => import("@/views/product/attr/index.vue"),
+        path: "Attr",
         name: "Attr",
+        component: () => import("@/views/product/attr/index.vue"),
         meta: {
           title: "属性管理",
           isShowInMenu: true,
@@ -97,9 +108,9 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/Sku",
-        component: () => import("@/views/product/sku/index.vue"),
+        path: "Sku",
         name: "Sku",
+        component: () => import("@/views/product/sku/index.vue"),
         meta: {
           title: "sku管理",
           isShowInMenu: true,
@@ -107,9 +118,9 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/Spu",
-        component: () => import("@/views/product/spu/index.vue"),
+        path: "Spu",
         name: "Spu",
+        component: () => import("@/views/product/spu/index.vue"),
         meta: {
           title: "spu管理",
           isShowInMenu: true,
@@ -117,9 +128,9 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/Trademark",
-        component: () => import("@/views/product/trademark/index.vue"),
+        path: "Trademark",
         name: "Trademark",
+        component: () => import("@/views/product/trademark/index.vue"),
         meta: {
           title: "品牌管理",
           isShowInMenu: true,
@@ -130,8 +141,8 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: "/404",
-    component: () => import("@/views/404/404.vue"),
     name: "404",
+    component: () => import("@/views/404/404.vue"),
     meta: {
       title: "404页面",
       isShowInMenu: false,
