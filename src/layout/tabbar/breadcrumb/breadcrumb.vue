@@ -19,7 +19,11 @@ const layoutSetingStore = useLayoutSettingStore();
   </el-icon>
   <div class="breadcrumb">
     <el-breadcrumb separator=">">
-      <el-breadcrumb-item v-for="route in routes" :to="{ name: route.name }" :key="route.path">
+      <el-breadcrumb-item
+        v-for="route in routes"
+        :to="{ name: route.name }"
+        :key="route.path"
+      >
         <el-icon>
           <component :is="route.meta.iconName"></component>
         </el-icon>
