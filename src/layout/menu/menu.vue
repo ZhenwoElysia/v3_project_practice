@@ -29,24 +29,27 @@ watch(() => route.path, updateOpeneds, { immediate: true });
 
 //拿到路由
 const userRoute = reactive(userStore.menuRoutes.options.routes);
+
+//引入仓库，适当时机折叠菜单
+import useLayoutSettingStore from "@/store/modules/layoutSetting";
+const layoutSettingStore = useLayoutSettingStore();
 </script>
 
 <template>
-  <div>
-    <logo></logo>
-    <el-scrollbar class="scrollbar">
-      <el-menu
-        background-color="#292529"
-        text-color="#ffffff"
-        active-text-color="#baaecc"
-        :active="activePath"
-        :default-openeds="openeds"
-      >
-        <!-- 利用props来传递参数,实现组件自己的递归 -->
-        <menuDetails :userRoute="userRoute"></menuDetails>
-      </el-menu>
-    </el-scrollbar>
-  </div>
+  <logo></logo>
+  <el-scrollbar class="scrollbar">
+    <el-menu
+      background-color="#292529"
+      text-color="#ffffff"
+      active-text-color="#baaecc"
+      :active="activePath"
+      :default-openeds="openeds"
+      :collapse="layoutSettingStore.isFold"
+    >
+      <!-- 利用props来传递参数,实现组件自己的递归 -->
+      <menuDetails :userRoute="userRoute"></menuDetails>
+    </el-menu>
+  </el-scrollbar>
 </template>
 
 <style lang="scss" scoped>
@@ -54,17 +57,5 @@ const userRoute = reactive(userStore.menuRoutes.options.routes);
   text-align: center;
   height: 90vh;
   width: 100%;
-}
-
-.scrollbar-demo-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  margin: 10px;
-  text-align: center;
-  border-radius: 4px;
-  background: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
 }
 </style>

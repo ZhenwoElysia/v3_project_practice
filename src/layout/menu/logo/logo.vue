@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import useLayoutSettingStore from "@/store/modules/layoutSetting";
+const layoutSettingStore = useLayoutSettingStore();
 defineOptions({
   name: "view-logo",
 });
@@ -7,7 +9,7 @@ defineOptions({
 <template>
   <div>
     <img src="@/assets/logos/logo.png" alt="" />
-    <h2>
+    <h2 v-show="!layoutSettingStore.isFold">
       甄选运营
       <br />
       (<a href="https://github.com/ZhenwoElysia">空白</a>版)
@@ -23,14 +25,15 @@ div {
   color: #ff6c94;
   padding: 10px;
   align-items: center;
+  overflow: hidden;
 
   img {
-    width: 25%;
+    width: 64px;
     margin-right: 10%;
   }
 
   h2 {
-    align-content: center;
+    white-space: nowrap;
   }
 }
 </style>
