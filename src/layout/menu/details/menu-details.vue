@@ -8,7 +8,11 @@ interface MenuItemRegistered {
 }
 const router = useRouter();
 const goRoute = (vc: MenuItemRegistered) => {
-  router.push({ name: vc.index });
+  let { index } = vc
+  if (index[0] === '/') {
+    index = index.slice(1)
+  }
+  router.push({ name: index });
 };
 //[{path:'xxx',compoment:xxx,chirldren:[{xxx}]}.{}]
 </script>

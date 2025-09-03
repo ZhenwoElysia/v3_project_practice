@@ -71,7 +71,7 @@ const checkUser = async () => {
     const nowTimeStr = getHour(); //获取当前时间(早中晚)
     //跳转到home
     router.push({
-      name: 'Layout',
+      name: "Layout",
     });
     ElNotification({
       type: "success",
@@ -94,18 +94,34 @@ const checkUser = async () => {
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form action="" class="login_form" :model="user" :rules="rules" ref="loginForms">
+        <el-form
+          action=""
+          class="login_form"
+          :model="user"
+          :rules="rules"
+          ref="loginForms"
+        >
           <h1>Hello</h1>
           <h3>欢迎来到硅谷甄选</h3>
           <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="user.username"> </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" :prefix-icon="Lock" v-model="user.password" show-password>
+            <el-input
+              type="password"
+              :prefix-icon="Lock"
+              v-model="user.password"
+              show-password
+            >
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" :loading="isLoading" class="login_btn" @click="checkUser">
+            <el-button
+              type="primary"
+              :loading="isLoading"
+              class="login_btn"
+              @click="checkUser"
+            >
               登录
             </el-button>
           </el-form-item>

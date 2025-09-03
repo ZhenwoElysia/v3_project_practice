@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import Main from "@/layout/main/index.vue";
+import vMenu from "@/layout/menu/menu.vue";
+import Tabbar from "@/layout/tabbar/index.vue";
 defineProps(["token"]);
 defineOptions({
   name: "view-home",
 });
-import vMenu from "@/layout/menu/menu.vue";
+
 </script>
 
 <template>
@@ -13,10 +16,12 @@ import vMenu from "@/layout/menu/menu.vue";
       <vMenu></vMenu>
     </div>
     <!-- 顶部导航 -->
-    <div class="home_header">qwe</div>
+    <div class="home_header">
+      <Tabbar></Tabbar>
+    </div>
     <!-- 展示区 -->
     <div class="home_views">
-      <router-view></router-view>
+      <Main></Main>
     </div>
   </div>
 </template>
@@ -39,7 +44,8 @@ import vMenu from "@/layout/menu/menu.vue";
     left: 250px;
     width: calc(100vw - 250px);
     height: 50px;
-    background-color: rgb(214, 207, 226);
+    color: rgb(41, 37, 41);
+    background-color: rgb(255, 235, 248);
   }
 
   .home_views {
