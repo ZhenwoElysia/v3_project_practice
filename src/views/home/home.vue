@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ name: "main-home", });
+defineOptions({ name: "main-home" });
 </script>
 <template>
   <div></div>
