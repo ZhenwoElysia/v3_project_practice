@@ -3,7 +3,7 @@ function createUser() {
   return [
     {
       userId: 1,
-      avator: "//url",
+      avatar: "/assets/logos/logo.png",
       username: "admin",
       password: "111111",
       desc: "平台管理员",
@@ -14,7 +14,7 @@ function createUser() {
     },
     {
       userId: 2,
-      avator: "//url",
+      avatar: "/assets/logos/logo.png",
       username: "system",
       password: "111111",
       desc: "系统管理员",

@@ -14,7 +14,6 @@ watch(
     // 销毁并重新挂载完毕，将isDestroyed重置为false
     nextTick(() => {
       isDestroyed.value = false;
-      console.log(123);
     });
   },
 );
@@ -23,8 +22,7 @@ watch(
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade">
-      <!-- 渲染layout一级组件的子组件 -->
-      <component :is="Component" v-if="isDestroyed" />
+      <component :is="Component" :key="layoutSettingStore.refresh" />
     </transition>
   </router-view>
 </template>

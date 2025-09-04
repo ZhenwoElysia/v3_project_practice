@@ -3,10 +3,11 @@ import { User, Lock } from "@element-plus/icons-vue";
 import { reactive, ref } from "vue";
 import useUserStore from "@/store/modules/user";
 import type { loginType, retrunLoginType } from "@/api/user/type";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { ElNotification } from "element-plus";
 import { getHour } from "@/utils/time";
 const router = useRouter();
+const route = useRoute();
 defineOptions({
   name: "master-login",
 });
@@ -71,7 +72,7 @@ const checkUser = async () => {
     const nowTimeStr = getHour(); //获取当前时间(早中晚)
     //跳转到home
     router.push({
-      name: "Layout",
+      path: route.query.redirect || "/Home",
     });
     ElNotification({
       type: "success",

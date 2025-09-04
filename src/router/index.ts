@@ -12,19 +12,20 @@ const routes: RouteRecordRaw[] = [
       isShowInMenu: true, //是否显示到左边菜单中，不写则为undifined
       iconName: "HomeFilled", //菜单文字左侧的图标
     },
-    redirect: "/Home",
-    children: [],
+    redirect: { name: "Home" },
+    children: [
+      {
+        path: "Home",
+        name: "Home",
+        component: () => import("@/views/home/home.vue"),
+        meta: {
+          title: "首页",
+          isShowInMenu: true,
+          iconName: "HomeFilled",
+        },
+      },
+    ],
     //将路由收到的params参数作为prop传入组件
-  },
-  {
-    path: "/Home",
-    name: "Home",
-    component: () => import("@/layout/index.vue"),
-    meta: {
-      title: "首页",
-      isShowInMenu: true,
-      iconName: "HomeFilled",
-    },
   },
   {
     path: "/Login",

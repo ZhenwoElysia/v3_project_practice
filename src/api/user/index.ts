@@ -8,5 +8,5 @@ const API = {
 //登录的接口
 export const reqLogin = (data: loginType) =>
   http.post<object, retrunLoginType>(API.LOGIN_URL, data);
-export const reqUerInfo = (data: object) =>
-  http.post<object, retrunResponseType>(API.INFO_URL, data);
+export const reqUserInfo = () =>
+  http.get<object, retrunResponseType>(API.INFO_URL);

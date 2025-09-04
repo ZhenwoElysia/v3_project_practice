@@ -1,5 +1,9 @@
 import axios from "axios";
 import { ElMessage } from "element-plus";
+
+//引入用户有关的仓库，在请求拦截器里面让请求携带token
+import useUserStore from "@/store/modules/user";
+
 const request = axios.create({
   //基础路径会携带/api      引入的环境变量
   baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -8,10 +12,17 @@ const request = axios.create({
 
 //给request实例添加请求拦截器
 request.interceptors.request.use((config) => {
-  //请求头config.headers,给服务器端携带公共参数
+  //请求头config.headers,给服务器端携带公共参数(token)
+  //在内部定义不然和store有关联:store需要http请求,http请求需要store的token
+  const userStore = useUserStore();
+  //让请求头携带token
+  if (userStore.token) {
+    config.headers.token = userStore.token;
+  }
   //必须返回配置对象
   return config;
 });
+
 //给request实例添加响应拦截器
 request.interceptors.response.use(
   //成功的回调

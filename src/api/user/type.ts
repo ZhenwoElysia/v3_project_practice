@@ -2,7 +2,7 @@
 
 interface userInfo {
   userId: number;
-  avator: string;
+  avatar: string;
   username: string;
   password: string;
   desc: string;

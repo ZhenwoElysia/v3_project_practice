@@ -8,11 +8,7 @@ interface MenuItemRegistered {
 }
 const router = useRouter();
 const goRoute = (vc: MenuItemRegistered) => {
-  let { index } = vc;
-  if (index[0] === "/") {
-    index = index.slice(1);
-  }
-  router.push({ name: index });
+  router.push({ name: vc.index });
 };
 //[{path:'xxx',compoment:xxx,chirldren:[{xxx}]}.{}]
 </script>
@@ -21,7 +17,7 @@ const goRoute = (vc: MenuItemRegistered) => {
     <!-- 如果存在路由有二级路由，用sub折叠菜单 -->
     <el-sub-menu
       v-if="routeObj.children && routeObj.children.length > 1"
-      :index="routeObj.path"
+      :index="routeObj.name"
     >
       <!-- 标题 -->
       <template #title>
@@ -36,7 +32,7 @@ const goRoute = (vc: MenuItemRegistered) => {
     <!-- 如果无子组件，且需要在页面显示 -->
     <el-menu-item
       v-if="!routeObj.children && routeObj.meta.isShowInMenu === true"
-      :index="routeObj.path"
+      :index="routeObj.name"
       @click="goRoute"
     >
       <el-icon>
@@ -44,12 +40,14 @@ const goRoute = (vc: MenuItemRegistered) => {
       </el-icon>
       <span>{{ routeObj.meta.title }}</span>
     </el-menu-item>
+    <!-- 有或者只有一个chilrdren -->
     <el-menu-item
       v-if="
         routeObj.children &&
         routeObj.children.length === 1 &&
         routeObj.children[0].meta.isShowInMenu === true
       "
+      :index="routeObj.name"
       @click="goRoute"
     >
       <el-icon>

@@ -9,6 +9,21 @@ const makeFullScreen = () => {
     document.exitFullscreen();
   }
 };
+
+// 引入用户的信息（头像）（名字）
+import useUserStore from "@/store/modules/user";
+const userStore = useUserStore();
+userStore.getUserInfo();
+//引入路由器、路由、跳转，以及携带跳转时的地址
+import { useRoute, useRouter } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+
+const logout = () => {
+  userStore.logout();
+  //退出登录后跳转到登录页面
+  router.push({ path: "/login", query: { redirect: route.fullPath } });
+};
 </script>
 
 <template>
@@ -33,11 +48,12 @@ const makeFullScreen = () => {
     </el-icon>
   </el-button>
   <!-- 用户头像 -->
-  <img src="@/assets/logos/logo.png" alt="" />
+  <img :src="userStore.avatar" alt="" />
   <!-- 退出登录等选项 -->
   <el-dropdown>
     <span class="el-dropdown-link">
-      其他选项
+      <!-- 用户名 -->
+      {{ userStore.username }}
       <el-icon class="el-icon--right">
         <arrow-down />
       </el-icon>
@@ -45,7 +61,7 @@ const makeFullScreen = () => {
     <!-- 选项内容 -->
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
