@@ -30,7 +30,8 @@ import "@/style/index.scss";
 //引入路由
 import router from "./router";
 app.use(router);
-
+//引入路由鉴权
+import "@/router/permission";
 //引入pinia
 import pinia from "@/store/index";
 app.use(pinia);
