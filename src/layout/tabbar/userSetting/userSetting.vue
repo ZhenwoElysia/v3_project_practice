@@ -13,7 +13,6 @@ const makeFullScreen = () => {
 // 引入用户的信息（头像）（名字）
 import useUserStore from "@/store/modules/user";
 const userStore = useUserStore();
-userStore.getUserInfo();
 //引入路由器、路由、跳转，以及携带跳转时的地址
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();

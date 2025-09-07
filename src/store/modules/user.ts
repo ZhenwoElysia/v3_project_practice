@@ -35,8 +35,10 @@ const useUserStore = defineStore("user", {
       if (result.code === 200) {
         this.avatar = result.data.checkUser.avatar;
         this.username = result.data.checkUser.username;
+        return true;
+      } else {
+        return Promise.reject("获取用户信息失败");
       }
-      return result;
     },
     async logout() {
       //要告诉服务器登陆推出的请求(无相应的mock接口)
