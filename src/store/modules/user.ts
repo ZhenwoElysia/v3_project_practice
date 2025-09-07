@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reqLogin, reqUserInfo } from "@/api/user";
+import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
 import type { loginType, retrunLoginType } from "@/api/user/type";
 import router from "@/router";
 
@@ -19,6 +19,7 @@ const useUserStore = defineStore("user", {
     //登录的方法
     async userLogin(user: loginType) {
       const result: retrunLoginType = await reqLogin(user);
+      console.log(result);
       //登录成功
       if (result.code === 200) {
         //存储token
@@ -42,6 +43,7 @@ const useUserStore = defineStore("user", {
     },
     async logout() {
       //要告诉服务器登陆推出的请求(无相应的mock接口)
+      await reqLogout();
       //清空token等相关信息
       //跳转到Login
       this.token = "";

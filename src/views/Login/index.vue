@@ -72,7 +72,7 @@ const checkUser = async () => {
     const nowTimeStr = getHour(); //获取当前时间(早中晚)
     //跳转到home
     router.push({
-      path: route.query.redirect || "/Home",
+      path: route.query.redirect ? route.query.redirect[0] || "/Home" : "/Home",
     });
     ElNotification({
       type: "success",
