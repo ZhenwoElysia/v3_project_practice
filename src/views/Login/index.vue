@@ -2,7 +2,7 @@
 import { User, Lock } from "@element-plus/icons-vue";
 import { reactive, ref } from "vue";
 import useUserStore from "@/store/modules/user";
-import type { loginType, retrunLoginType } from "@/api/user/type";
+import type { loginType } from "@/api/user/type";
 import { useRouter, useRoute } from "vue-router";
 import { ElNotification } from "element-plus";
 import { getHour } from "@/utils/time";
@@ -81,8 +81,8 @@ const checkUser = async () => {
       type: "success",
       title: "hi，" + nowTimeStr + "好",
     });
-  } catch (err) {
-    const error = err as retrunLoginType;
+  } catch (err: unknown) {
+    const error = err as { code: string };
     ElNotification({
       type: "error",
       message: "登陆失败," + error.code,
@@ -97,34 +97,18 @@ const checkUser = async () => {
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form
-          action=""
-          class="login_form"
-          :model="user"
-          :rules="rules"
-          ref="loginForms"
-        >
+        <el-form action="" class="login_form" :model="user" :rules="rules" ref="loginForms">
           <h1>Hello</h1>
           <h3>欢迎来到硅谷甄选</h3>
           <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="user.username"> </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              type="password"
-              :prefix-icon="Lock"
-              v-model="user.password"
-              show-password
-            >
+            <el-input type="password" :prefix-icon="Lock" v-model="user.password" show-password>
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button
-              type="primary"
-              :loading="isLoading"
-              class="login_btn"
-              @click="checkUser"
-            >
+            <el-button type="primary" :loading="isLoading" class="login_btn" @click="checkUser">
               登录
             </el-button>
           </el-form-item>

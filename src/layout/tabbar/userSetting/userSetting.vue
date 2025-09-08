@@ -18,10 +18,10 @@ import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 
-const logout = () => {
-  userStore.logout();
+const logout = async () => {
+  await userStore.logout();
   //退出登录后跳转到登录页面
-  router.push({ path: "/login", query: { redirect: route.fullPath } });
+  router.push({ name: "Login", query: { redirect: route.fullPath } });
 };
 </script>
 

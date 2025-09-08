@@ -26,11 +26,14 @@ class Permission {
   ) {
     const token = userStore.token;
     const username = userStore.username;
+    console.log("用户信息", { token, username });
     if (token) {
       //已经登录成功的无法访问login
+      console.log("to.path", to.path);
       if (to.path === "/login") {
         //跳转到对应的页面
-        next({ path: "/", query: { redirect: to.path } });
+        console.log("返回登录页面");
+        next({ path: "/login", query: { redirect: to.path } });
       } else {
         //如果有用户名
         if (username) {
@@ -41,8 +44,8 @@ class Permission {
             await userStore.getUserInfo();
             next();
           } catch (err) {
-            console.log(err);
             next({ path: "/login" });
+            throw new Error(err as string);
           }
         }
       }

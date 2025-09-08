@@ -152,7 +152,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: "/:pathMatch(.*)*",
-    redirect: "/",
+    redirect: "/login",
     meta: {
       title: "测试用",
       isShowInMenu: false,

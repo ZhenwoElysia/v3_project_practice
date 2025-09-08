@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
-import type { loginType, responseType } from "@/api/user/type";
+import type { loginType } from "@/api/user/type";
 import router from "@/router";
 
 const useUserStore = defineStore("user", {
@@ -10,7 +10,7 @@ const useUserStore = defineStore("user", {
       //获取token
       token: localStorage.getItem("TOKEN"), //用户的唯一标识
       menuRoutes: router,
-      avatar: "@/assets/logos/logo.jpg", //用户头像
+      avatar: "", //用户头像
       username: "", //用户名
     };
   },
@@ -18,15 +18,13 @@ const useUserStore = defineStore("user", {
   actions: {
     //登录的方法
     async userLogin(user: loginType) {
-      const result: responseType = await reqLogin(user);
-      console.log("result", result);
-
+      const result = await reqLogin(user);
       //登录成功
       if (result.code === 200) {
         //存储token
         //------------后端result.data就是真正的token-------------
-        this.token = result.data as string;
-        localStorage.setItem("TOKEN", this.token);
+        this.token = result.data;
+        localStorage.setItem("TOKEN", this.token as string);
         return result;
       } else {
         return Promise.reject(result);
@@ -35,12 +33,10 @@ const useUserStore = defineStore("user", {
     //获取用户信息的方法
     async getUserInfo() {
       const result = await reqUserInfo(this.token);
-      console.log("result", result);
       if (result.code === 200) {
-        console.log("-----", result);
-
-        this.avatar = result.data.avatar;
-        this.username = result.data.name;
+        const data = result.data;
+        this.avatar = data.avatar;
+        this.username = data.name;
         return true;
       } else {
         return Promise.reject("获取用户信息失败");
@@ -48,7 +44,7 @@ const useUserStore = defineStore("user", {
     },
     async logout() {
       //要告诉服务器登陆推出的请求(无相应的mock接口)
-      await reqLogout();
+      await reqLogout(this.token as string);
       //清空token等相关信息
       //跳转到Login
       this.token = "";
