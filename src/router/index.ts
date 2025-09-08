@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 //路由
 const routes: RouteRecordRaw[] = [
   {
@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
     redirect: { name: "Home" },
     children: [
       {
-        path: "Home",
+        path: "home",
         name: "Home",
         component: () => import("@/views/home/home.vue"),
         meta: {
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
     //将路由收到的params参数作为prop传入组件
   },
   {
-    path: "/Login",
+    path: "/login",
     name: "Login",
     component: () => import("@/views/Login/index.vue"),
     meta: {
@@ -37,7 +37,7 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/Screen",
+    path: "/screen",
     name: "Screen",
     component: () => import("@/views/screen/index.vue"),
     meta: {
@@ -47,7 +47,7 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/Aci",
+    path: "/aci",
     name: "Aci",
     component: () => import("@/layout/index.vue"),
     meta: {
@@ -57,7 +57,7 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "Role",
+        path: "role",
         component: () => import("@/views/acl/role/index.vue"),
         name: "Role",
         meta: {
@@ -67,7 +67,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "User",
+        path: "user",
         name: "User",
         component: () => import("@/views/acl/user/index.vue"),
         meta: {
@@ -77,7 +77,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "Permission",
+        path: "permission",
         name: "Permission",
         component: () => import("@/views/acl/permission/index.vue"),
         meta: {
@@ -89,7 +89,7 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: "/Product",
+    path: "/product",
     name: "Product",
     component: () => import("@/layout/index.vue"),
     meta: {
@@ -99,7 +99,7 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "Attr",
+        path: "attr",
         name: "Attr",
         component: () => import("@/views/product/attr/index.vue"),
         meta: {
@@ -109,7 +109,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "Sku",
+        path: "sku",
         name: "Sku",
         component: () => import("@/views/product/sku/index.vue"),
         meta: {
@@ -119,7 +119,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "Spu",
+        path: "spu",
         name: "Spu",
         component: () => import("@/views/product/spu/index.vue"),
         meta: {
@@ -129,7 +129,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "Trademark",
+        path: "trademark",
         name: "Trademark",
         component: () => import("@/views/product/trademark/index.vue"),
         meta: {
@@ -163,7 +163,7 @@ const routes: RouteRecordRaw[] = [
 //创建路由器
 const router = createRouter({
   routes,
-  history: createWebHistory(import.meta.env.VITE_APP_BASE_URL),
+  history: createWebHashHistory(import.meta.env.VITE_APP_BASE_URL),
 });
 
 export default router;

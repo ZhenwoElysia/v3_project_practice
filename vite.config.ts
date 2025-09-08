@@ -1,12 +1,13 @@
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
-import { viteMockServe } from "vite-plugin-mock";
+// import { viteMockServe } from "vite-plugin-mock";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd());
+  console.log(command);
   return {
     plugins: [
       vue(),
@@ -14,11 +15,11 @@ export default defineConfig(({ command, mode }) => {
         iconDirs: [path.resolve(process.cwd(), "src/assets/icons")],
         symbolId: "icon-[dir]-[name]",
       }),
-      viteMockServe({
-        mockPath: "mock",
-        // 只在本地开发（vite serve）时启用 mock
-        localEnabled: command === "serve",
-      }),
+      // viteMockServe({
+      //   mockPath: "mock",
+      //   // 只在本地开发（vite serve）时启用 mock
+      //   localEnabled: command === "serve",
+      // }),
     ],
     resolve: {
       alias: {
@@ -32,7 +33,6 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-
     //代理跨域
     server: {
       //代理

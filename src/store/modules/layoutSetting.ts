@@ -9,7 +9,6 @@ const useLayoutSettingStore = defineStore("layoutSettingStore", {
   actions: {
     changeIsFold() {
       this.isFold = !this.isFold;
-      console.log(this.isFold);
     },
   },
 });

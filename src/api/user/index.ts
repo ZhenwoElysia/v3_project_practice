@@ -10,8 +10,8 @@ const API = {
 export const reqLogin = (data: loginType) =>
   http.post<object, retrunLoginType>(API.LOGIN_URL, data);
 //获取用户信息
-export const reqUserInfo = () =>
-  http.get<object, retrunResponseType>(API.INFO_URL);
+export const reqUserInfo = (token: string | null) =>
+  http.get<object, retrunResponseType>(API.INFO_URL, { params: { token } });
 
 //退出登录
 export const reqLogout = () => http.post(API.LOGOUT_URL);

@@ -13,7 +13,7 @@ import useUserStore from "@/store/modules/user";
 const userStore = useUserStore(pinia);
 //引入进度条
 //不明原因，无法使用
-// import nprogress from "nprogress;
+// import nprogress from "nprogress";
 //引入进度条的样式
 // import "nprogress/nprogress.css";
 
@@ -22,13 +22,14 @@ class Permission {
   async judLoginPermission_before(
     to: RouteLocationNormalizedGeneric,
     _from: RouteLocationNormalizedLoadedGeneric,
-    next: NavigationGuardNext,
+    next: NavigationGuardNext
   ) {
     const token = userStore.token;
     const username = userStore.username;
     if (token) {
       //已经登录成功的无法访问login
-      if (to.path === "/Login") {
+      if (to.path === "/login") {
+        //跳转到对应的页面
         next({ path: "/", query: { redirect: to.path } });
       } else {
         //如果有用户名
@@ -41,17 +42,16 @@ class Permission {
             next();
           } catch (err) {
             console.log(err);
-            await userStore.logout();
-            next({ path: "/Login", query: { redirect: to.path } });
+            next({ path: "/login" });
           }
         }
       }
     } else {
       //还未登录的判断路径进行访问
-      if (to.path === "/Login") {
+      if (to.path === "/login") {
         next();
       } else {
-        next({ path: "/Login" });
+        next({ path: "/login" });
       }
     }
   }
@@ -66,6 +66,5 @@ router.beforeEach(async (to, from, next) => {
 //全局后置守卫
 // router.afterEach((to, from) => {
 //   // nprogress.done();
-//   console.log("-------");
 // });
 //七个路由：login||数据大屏||首页||商品管理||用户管理||404||任意路由

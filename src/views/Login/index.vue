@@ -72,18 +72,20 @@ const checkUser = async () => {
     const nowTimeStr = getHour(); //获取当前时间(早中晚)
     //跳转到home
     router.push({
-      path: route.query.redirect ? route.query.redirect[0] || "/Home" : "/Home",
+      path: route.query.redirect ? route.query.redirect[0] || "/home" : "/home",
     });
+    //提示登录成功
+    console.log(result);
+
     ElNotification({
       type: "success",
-      message: result.data.message,
       title: "hi，" + nowTimeStr + "好",
     });
   } catch (err) {
     const error = err as retrunLoginType;
     ElNotification({
       type: "error",
-      message: error.data.message,
+      message: "登陆失败," + error.code,
     });
   }
   isLoading.value = !isLoading.value;

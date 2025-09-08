@@ -15,6 +15,8 @@ request.interceptors.request.use((config) => {
   //请求头config.headers,给服务器端携带公共参数(token)
   //在内部定义不然和store有关联:store需要http请求,http请求需要store的token
   const userStore = useUserStore();
+  console.log("userStore", userStore);
+
   //让请求头携带token
   if (userStore.token) {
     config.headers.token = userStore.token;
