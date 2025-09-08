@@ -39,4 +39,9 @@ watch(
 .fade-enter-to {
   opacity: 1;
 }
+
+.fade-leave-active {
+  //消失时迅速，避免页面变形
+  transition: all 0s;
+}
 </style>

@@ -60,7 +60,11 @@ defineOptions({
     width: calc(100vw - 15vw);
     height: 50px;
     color: rgb(41, 37, 41);
-    background-image: linear-gradient(to right, rgb(255, 255, 255), #ffebf8);
+    background-image: linear-gradient(
+      to right,
+      rgba(242, 153, 176, 0.1),
+      #ffebf8
+    );
     transition: all 0.5s;
 
     &.fold {
@@ -76,8 +80,8 @@ defineOptions({
     width: calc(100vw - 15vw);
     height: calc(100vh - 50px);
     padding: 20px;
-    background-color: rgb(186, 174, 204);
     overflow: auto;
+    transition: display 0s;
     transition: all 0.5s;
 
     &.fold {

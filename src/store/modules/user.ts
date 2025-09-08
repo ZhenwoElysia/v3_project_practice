@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
+import { reqLogin, reqUserInfo, reqLogout } from "@/api/user/userApi";
 import type { loginType } from "@/api/user/type";
 import router from "@/router";
 

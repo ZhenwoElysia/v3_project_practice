@@ -39,7 +39,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/screen",
     name: "Screen",
-    component: () => import("@/views/screen/index.vue"),
+    component: () => import("@/views/screen/screen.vue"),
     meta: {
       title: "数据大屏",
       isShowInMenu: true,
@@ -99,9 +99,19 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
+        path: "trademark",
+        name: "Trademark",
+        component: () => import("@/views/product/trademark/trademark.vue"),
+        meta: {
+          title: "品牌管理",
+          isShowInMenu: true,
+          iconName: "ShoppingCart",
+        },
+      },
+      {
         path: "attr",
         name: "Attr",
-        component: () => import("@/views/product/attr/index.vue"),
+        component: () => import("@/views/product/attr/attr.vue"),
         meta: {
           title: "属性管理",
           isShowInMenu: true,
@@ -111,7 +121,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: "sku",
         name: "Sku",
-        component: () => import("@/views/product/sku/index.vue"),
+        component: () => import("@/views/product/sku/sku.vue"),
         meta: {
           title: "sku管理",
           isShowInMenu: true,
@@ -121,21 +131,11 @@ const routes: RouteRecordRaw[] = [
       {
         path: "spu",
         name: "Spu",
-        component: () => import("@/views/product/spu/index.vue"),
+        component: () => import("@/views/product/spu/spu.vue"),
         meta: {
           title: "spu管理",
           isShowInMenu: true,
           iconName: "Calendar",
-        },
-      },
-      {
-        path: "trademark",
-        name: "Trademark",
-        component: () => import("@/views/product/trademark/index.vue"),
-        meta: {
-          title: "品牌管理",
-          isShowInMenu: true,
-          iconName: "ShoppingCart",
         },
       },
     ],
