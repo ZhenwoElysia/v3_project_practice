@@ -22,7 +22,7 @@ class Permission {
   async judLoginPermission_before(
     to: RouteLocationNormalizedGeneric,
     _from: RouteLocationNormalizedLoadedGeneric,
-    next: NavigationGuardNext
+    next: NavigationGuardNext,
   ) {
     const token = userStore.token;
     const username = userStore.username;

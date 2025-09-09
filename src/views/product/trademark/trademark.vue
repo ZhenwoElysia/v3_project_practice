@@ -21,9 +21,22 @@ onMounted(async () => {
   <el-card>
     <el-button type="primary" size="large" icon="Plus">添加品牌</el-button>
     <el-table :data="trademarkList" style="width: 100%" border stripe>
-      <el-table-column label="序号" width="100%" align="center" prop="id"></el-table-column>
-      <el-table-column label="品牌名称" align="center" prop="tmName"></el-table-column>
-      <el-table-column label="品牌logo" align="center" prop="logoUrl"></el-table-column>
+      <el-table-column
+        label="序号"
+        width="100%"
+        align="center"
+        prop="id"
+      ></el-table-column>
+      <el-table-column
+        label="品牌名称"
+        align="center"
+        prop="tmName"
+      ></el-table-column>
+      <el-table-column
+        label="品牌logo"
+        align="center"
+        prop="logoUrl"
+      ></el-table-column>
       <el-table-column label="操作" align="center"></el-table-column>
     </el-table>
     <!-- <el-pagination v-model:current-page="pageNum" default-page-size="4" v-model:page-size="pageSize"
