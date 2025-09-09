@@ -22,17 +22,14 @@ class Permission {
   async judLoginPermission_before(
     to: RouteLocationNormalizedGeneric,
     _from: RouteLocationNormalizedLoadedGeneric,
-    next: NavigationGuardNext,
+    next: NavigationGuardNext
   ) {
     const token = userStore.token;
     const username = userStore.username;
-    console.log("用户信息", { token, username });
     if (token) {
       //已经登录成功的无法访问login
-      console.log("to.path", to.path);
       if (to.path === "/login") {
         //跳转到对应的页面
-        console.log("返回登录页面");
         next({ path: "/login", query: { redirect: to.path } });
       } else {
         //如果有用户名

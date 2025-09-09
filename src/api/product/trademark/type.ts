@@ -1,17 +1,11 @@
-export interface TradeMarkListType {
+export interface TradeMarkResponseType {
   code: number;
-  data: {
-    ID: 0;
-    createTime: {
-      "time.Time": string;
-    };
-    id: 0;
-    logoUrl: string;
-    tmName: string;
-    updateTime: {
-      "time.Time": string;
-    };
-  }[];
+  data: TradeMarkItemType[];
   message: string;
-  ok: true;
+  ok: boolean;
+}
+export interface TradeMarkItemType {
+  id: number;
+  logoUrl: string;
+  tmName: string;
 }
