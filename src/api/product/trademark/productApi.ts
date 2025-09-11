@@ -1,12 +1,32 @@
 import http from "@/utils/http";
-import type { TradeMarkListType } from "./type";
+import type { TradeMarkPageResponsType, AllTrademarkResponse } from "./type";
 const API = {
-  GET_TRADEMARK_URL: "/admin/product/baseTrademark/getTrademarkList",
+  GET_TRADEMARK_BASE_URL: "/admin/product/baseTrademark",
+  GET_ALL_TRADEMARKLIST_URL: "/getTrademarkList",
 };
 
-//获取品牌列表
+// 获得全部品牌列表
 export const reqGetTradeMark = (token: string) => {
-  return http.get<TradeMarkListType>(API.GET_TRADEMARK_URL, {
-    params: { token },
-  });
+  return http.get<AllTrademarkResponse>(
+    API.GET_TRADEMARK_BASE_URL + API.GET_ALL_TRADEMARKLIST_URL,
+    {
+      params: {
+        token,
+      },
+    }
+  );
+};
+
+//获取分页品牌列表
+export const reqGetTradeMarkWithPages = (
+  token: string,
+  page: number,
+  limit: number
+) => {
+  return http.get<TradeMarkPageResponsType>(
+    API.GET_TRADEMARK_BASE_URL + `/${page}/${limit}`,
+    {
+      params: { token, page, limit },
+    }
+  );
 };
