@@ -7,13 +7,13 @@ const API = {
 
 // 获得全部品牌列表
 export const reqGetTradeMark = (token: string) => {
-  return http.get<AllTrademarkResponse>(
+  return http.get<object, AllTrademarkResponse>(
     API.GET_TRADEMARK_BASE_URL + API.GET_ALL_TRADEMARKLIST_URL,
     {
       params: {
         token,
       },
-    },
+    }
   );
 };
 
@@ -21,12 +21,12 @@ export const reqGetTradeMark = (token: string) => {
 export const reqGetTradeMarkWithPages = (
   token: string,
   page: number,
-  limit: number,
+  limit: number
 ) => {
-  return http.get<TradeMarkPageResponsType>(
+  return http.get<object, TradeMarkPageResponsType>(
     API.GET_TRADEMARK_BASE_URL + `/${page}/${limit}`,
     {
       params: { token, page, limit },
-    },
+    }
   );
 };
