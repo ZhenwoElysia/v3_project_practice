@@ -1,11 +1,9 @@
 <script setup lang="ts">
-defineOptions({ name: 'trademarkAddition' })
+defineOptions({ name: "trademarkAddition" });
 </script>
 
 <template>
-  <div>
-
-  </div>
+  <div></div>
 </template>
 
 <style lang="scss" scoped></style>
