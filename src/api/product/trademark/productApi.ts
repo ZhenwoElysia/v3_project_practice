@@ -20,20 +20,20 @@ export const reqGetTradeMark = (token: string) => {
       params: {
         token,
       },
-    }
+    },
   );
 };
 //获取分页品牌列表
 export const reqGetTradeMarkWithPages = (
   token: string,
   page: number,
-  limit: number
+  limit: number,
 ) => {
   return http.get<object, TradeMarkPageResponsType>(
     API.GET_TRADEMARK_BASE_URL + `/${page}/${limit}`,
     {
       params: { token, page, limit },
-    }
+    },
   );
 };
 //修改品牌
@@ -48,7 +48,7 @@ export const updateTrademark = (trademarkItem: ItemType) => {
     console.log("新增");
     return http.post<object, ResponseDataType>(
       API.ADD_NEW_TRADEMARK_URL,
-      trademarkItem
+      trademarkItem,
     );
   }
 };

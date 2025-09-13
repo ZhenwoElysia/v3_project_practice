@@ -14,7 +14,7 @@ const userStore = useUserStore();
 import {
   reqGetTradeMarkWithPages,
   reqGetTradeMark,
-  updateTrademark
+  updateTrademark,
 } from "@/api/product/trademark/productApi";
 const token = userStore.token as string;
 let trademarkResponse;
@@ -52,11 +52,9 @@ watch([limit, pageNum], () => {
   getTrademarkList();
 });
 
-
-
 //添加与修改品牌
 let isDialog = ref(false);
-let dialogTitle = ref('')
+let dialogTitle = ref("");
 //新增或修改的item
 let trademarkItem = reactive<ItemType>({
   tmName: "",
@@ -65,19 +63,19 @@ let trademarkItem = reactive<ItemType>({
 
 const addNewTrademarkItem = () => {
   isDialog.value = true;
-  dialogTitle.value = "添加品牌"
-  trademarkItem.tmName = '';
-  trademarkItem.logoUrl = '';
-}
+  dialogTitle.value = "添加品牌";
+  trademarkItem.tmName = "";
+  trademarkItem.logoUrl = "";
+};
 //修改已有数据
 const changeTrademarkItem = (row: ItemType) => {
-  console.log('修改时的row', row);
+  console.log("修改时的row", row);
   isDialog.value = true;
-  dialogTitle.value = "修改当前品牌"
-  trademarkItem.id = row.id
-  trademarkItem.logoUrl = row.logoUrl
-  trademarkItem.tmName = row.tmName
-}
+  dialogTitle.value = "修改当前品牌";
+  trademarkItem.id = row.id;
+  trademarkItem.logoUrl = row.logoUrl;
+  trademarkItem.tmName = row.tmName;
+};
 //在图片上传前调用的钩子
 //限定文件的格式大小
 const beforePictureUpload: UploadProps["beforeUpload"] = (rawFile) => {
@@ -120,30 +118,35 @@ const cancel = () => {
 };
 //确认上传图片
 const comfirm = async () => {
-  const result = await updateTrademark(trademarkItem) as ResponseDataType
-  console.log('确认时的trademarkItem', trademarkItem);
-  console.log('确认时的result', result);
+  const result = (await updateTrademark(trademarkItem)) as ResponseDataType;
+  console.log("确认时的trademarkItem", trademarkItem);
+  console.log("确认时的result", result);
   // 成功上传/修改
   if (result.code == 200) {
     ElMessage({
-      type: 'success',
-      message: trademarkItem.id ? '修改品牌成功' : '添加品牌成功'
-    })
+      type: "success",
+      message: trademarkItem.id ? "修改品牌成功" : "添加品牌成功",
+    });
     //再次发请求，获取全部数据
-    await getTrademarkList()
+    await getTrademarkList();
   } else {
     ElMessage({
-      type: 'error',
-      message: result.message
-    })
+      type: "error",
+      message: result.message,
+    });
   }
   isDialog.value = false;
 };
-
 </script>
 <template>
   <el-card style="width: 90%; height: 95%">
-    <el-button type="primary" size="large" icon="Plus" @click="addNewTrademarkItem">添加品牌</el-button>
+    <el-button
+      type="primary"
+      size="large"
+      icon="Plus"
+      @click="addNewTrademarkItem"
+      >添加品牌</el-button
+    >
     <!-- 添加品牌 -->
     <el-dialog v-model="isDialog">
       <h1>{{ dialogTitle }}</h1>
@@ -154,9 +157,19 @@ const comfirm = async () => {
         <el-form-item label="上传品牌图片">
           <!-- action:图片上传路径，得带/api -->
           <!-- :headers生成请求头，携带token，不然会报207 -->
-          <el-upload class="avatar-uploader" action="/api/admin/product/fileUpload" :headers="{ token: token }"
-            :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforePictureUpload">
-            <img v-if="trademarkItem.logoUrl" :src="trademarkItem.logoUrl" class="avatar" />
+          <el-upload
+            class="avatar-uploader"
+            action="/api/admin/product/fileUpload"
+            :headers="{ token: token }"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforePictureUpload"
+          >
+            <img
+              v-if="trademarkItem.logoUrl"
+              :src="trademarkItem.logoUrl"
+              class="avatar"
+            />
             <el-icon v-else class="avatar-uploader-icon">
               <UploadFilled />
             </el-icon>
@@ -170,9 +183,25 @@ const comfirm = async () => {
     </el-dialog>
 
     <!-- 显示品牌 -->
-    <el-table :data="trademarkList" border stripe height="700" :row-style="{ height: '220px' }">
-      <el-table-column label="序号" align="center" width="80px" prop="id" type="index"></el-table-column>
-      <el-table-column label="品牌名称" align="center" prop="tmName"></el-table-column>
+    <el-table
+      :data="trademarkList"
+      border
+      stripe
+      height="700"
+      :row-style="{ height: '220px' }"
+    >
+      <el-table-column
+        label="序号"
+        align="center"
+        width="80px"
+        prop="id"
+        type="index"
+      ></el-table-column>
+      <el-table-column
+        label="品牌名称"
+        align="center"
+        prop="tmName"
+      ></el-table-column>
       <el-table-column label="品牌logo" align="center">
         <template #default="scope">
           <!-- scope:{
@@ -180,27 +209,40 @@ const comfirm = async () => {
               column: TableColumnCtx<TradeMarkItemType>
               $index: number//对应数组的索引值
           } -->
-          <img :src="scope.row.logoUrl" alt="logo" style="
+          <img
+            :src="scope.row.logoUrl"
+            alt="logo"
+            style="
               margin: 0 auto;
               width: 80px;
               height: 40px;
               object-fit: contain;
-            " />
+            "
+          />
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template #default="{ row }">
-          <el-button type="warning" @click="changeTrademarkItem(row)" icon="Edit">
+          <el-button
+            type="warning"
+            @click="changeTrademarkItem(row)"
+            icon="Edit"
+          >
           </el-button>
-          <el-button type="danger" icon="Delete">
-          </el-button>
+          <el-button type="danger" icon="Delete"> </el-button>
         </template>
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <el-pagination v-model:current-page="pageNum" v-model:page-size="limit" :default-page-size="4"
-      :page-sizes="[2, 3, 4, 5]" :background="false" layout=" prev, pager, next, jumper,->, total, sizes,"
-      :total="allDatas.length" />
+    <el-pagination
+      v-model:current-page="pageNum"
+      v-model:page-size="limit"
+      :default-page-size="4"
+      :page-sizes="[2, 3, 4, 5]"
+      :background="false"
+      layout=" prev, pager, next, jumper,->, total, sizes,"
+      :total="allDatas.length"
+    />
   </el-card>
 </template>
 
