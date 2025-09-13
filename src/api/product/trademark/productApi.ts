@@ -1,5 +1,6 @@
 import http from "@/utils/http";
 import type {
+  ResponseDataType,
   TradeMarkPageResponsType,
   AllTrademarkResponse,
   ItemType,
@@ -19,47 +20,35 @@ export const reqGetTradeMark = (token: string) => {
       params: {
         token,
       },
-    },
+    }
   );
 };
 //获取分页品牌列表
 export const reqGetTradeMarkWithPages = (
   token: string,
   page: number,
-  limit: number,
+  limit: number
 ) => {
   return http.get<object, TradeMarkPageResponsType>(
     API.GET_TRADEMARK_BASE_URL + `/${page}/${limit}`,
     {
       params: { token, page, limit },
-    },
+    }
   );
 };
 //修改品牌
 //如果有id则为修改，如果没有则添加
-export const updateTrademark = (token: string, trademarkItem: ItemType) => {
+export const updateTrademark = (trademarkItem: ItemType) => {
   //如果有id则是更新品牌
   if (trademarkItem.id) {
-    return http.put(API.UPDATE_TRADEMARK_URL, {
-      params: {
-        token,
-        object: {
-          id: trademarkItem.id,
-          logoUrl: trademarkItem.logoUrl,
-          tmName: trademarkItem.tmName,
-        },
-      },
-    });
+    console.log("更新");
+    return http.put(API.UPDATE_TRADEMARK_URL, trademarkItem);
   } else {
     //如果没有ID则新增品牌
-    return http.post(API.ADD_NEW_TRADEMARK_URL, {
-      params: {
-        token,
-        object: {
-          logoUrl: trademarkItem.logoUrl,
-          tmName: trademarkItem.tmName,
-        },
-      },
-    });
+    console.log("新增");
+    return http.post<object, ResponseDataType>(
+      API.ADD_NEW_TRADEMARK_URL,
+      trademarkItem
+    );
   }
 };

@@ -16,7 +16,6 @@ export interface ItemType {
   logoUrl: string;
 }
 export type RecordsType = ItemType[];
-
 //已有品牌的数据类型
 export interface TradeMarkPageResponsType extends ResponseDataType {
   data: {

@@ -63,6 +63,6 @@ request.interceptors.response.use(
       message,
     });
     return Promise.reject(error);
-  },
+  }
 );
 export default request;
