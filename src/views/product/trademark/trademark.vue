@@ -53,6 +53,7 @@ watch([limit, pageNum], () => {
 });
 
 //添加与修改品牌
+let formInfo = ref(); //获得logo实例
 let isDialog = ref(false);
 let dialogTitle = ref("");
 //新增或修改的item
@@ -66,6 +67,9 @@ const addNewTrademarkItem = () => {
   dialogTitle.value = "添加品牌";
   trademarkItem.tmName = "";
   trademarkItem.logoUrl = "";
+  //清楚表单校验给出的错误
+  formInfo.value?.clearValidate("logoUrl");
+  formInfo.value?.clearValidate("tmName"); //也可以用nextTick,避免第一次调用时未渲染导致undefined
 };
 //修改已有数据
 const changeTrademarkItem = (row: ItemType) => {
@@ -75,6 +79,9 @@ const changeTrademarkItem = (row: ItemType) => {
   trademarkItem.id = row.id;
   trademarkItem.logoUrl = row.logoUrl;
   trademarkItem.tmName = row.tmName;
+  //清理表单验证
+  formInfo.value?.clearValidate("logoUrl");
+  formInfo.value?.clearValidate("tmName"); //也可以用nextTick,避免第一次调用时未渲染导致undefined
 };
 //在图片上传前调用的钩子
 //限定文件的格式大小
@@ -111,6 +118,8 @@ const handleAvatarSuccess: UploadProps["onSuccess"] = (
 ) => {
   //收集上传的地址
   trademarkItem.logoUrl = response.data;
+  //清理未提交时的表单验证给出的错误信息
+  formInfo.value.clearValidate("logoUrl");
 };
 
 const cancel = () => {
@@ -118,6 +127,11 @@ const cancel = () => {
 };
 //确认上传图片
 const comfirm = async () => {
+  let checkForm = await formInfo.value.validate();
+  if (!checkForm) {
+    return;
+  }
+  console.log("checkForm", checkForm);
   const result = (await updateTrademark(trademarkItem)) as ResponseDataType;
   console.log("确认时的trademarkItem", trademarkItem);
   console.log("确认时的result", result);
@@ -137,6 +151,36 @@ const comfirm = async () => {
   }
   isDialog.value = false;
 };
+
+//表单校验
+const validatorTmName = (
+  _rule: object[],
+  value: string,
+  callBack: (error?: string | Error) => void,
+) => {
+  if (value.trim().length < 2) {
+    callBack(new Error("品牌名称必须大于等于两位"));
+  } else {
+    callBack();
+  }
+};
+const validatorLogoUrl = (
+  _rule: object[],
+  value: string,
+  callBack: (error?: string | Error) => void,
+) => {
+  //如果图片上传
+  if (value) {
+    callBack();
+  } else {
+    callBack(new Error("请上传logo图片"));
+  }
+};
+//校验规则
+const rules = {
+  tmName: [{ required: true, trigger: "blur", validator: validatorTmName }],
+  logoUrl: [{ required: true, validator: validatorLogoUrl }],
+};
 </script>
 <template>
   <el-card style="width: 90%; height: 95%">
@@ -150,11 +194,11 @@ const comfirm = async () => {
     <!-- 添加品牌 -->
     <el-dialog v-model="isDialog">
       <h1>{{ dialogTitle }}</h1>
-      <el-form>
-        <el-form-item label="输入品牌名称">
+      <el-form :model="trademarkItem" :rules="rules" ref="formInfo">
+        <el-form-item label="输入品牌名称" prop="tmName">
           <el-input v-model="trademarkItem.tmName"></el-input>
         </el-form-item>
-        <el-form-item label="上传品牌图片">
+        <el-form-item label="上传品牌图片" prop="logoUrl">
           <!-- action:图片上传路径，得带/api -->
           <!-- :headers生成请求头，携带token，不然会报207 -->
           <el-upload
@@ -227,8 +271,7 @@ const comfirm = async () => {
             type="warning"
             @click="changeTrademarkItem(row)"
             icon="Edit"
-          >
-          </el-button>
+          ></el-button>
           <el-button type="danger" icon="Delete"> </el-button>
         </template>
       </el-table-column>
