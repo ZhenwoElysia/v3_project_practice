@@ -10,6 +10,7 @@ const API = {
   GET_ALL_TRADEMARKLIST_URL: "/getTrademarkList",
   ADD_NEW_TRADEMARK_URL: "/admin/product/baseTrademark/save",
   UPDATE_TRADEMARK_URL: "/admin/product/baseTrademark/update",
+  DELETE_TRADEMARK_URL: "/admin/product/baseTrademark/remove",
 };
 
 // 获得全部品牌列表
@@ -51,4 +52,10 @@ export const updateTrademark = (trademarkItem: ItemType) => {
       trademarkItem,
     );
   }
+};
+//删除品牌
+export const deleteTrademark = (id: number) => {
+  return http.delete<object, ResponseDataType>(
+    API.DELETE_TRADEMARK_URL + "/" + id,
+  );
 };

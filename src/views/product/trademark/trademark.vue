@@ -15,6 +15,7 @@ import {
   reqGetTradeMarkWithPages,
   reqGetTradeMark,
   updateTrademark,
+  deleteTrademark,
 } from "@/api/product/trademark/productApi";
 const token = userStore.token as string;
 let trademarkResponse;
@@ -40,8 +41,11 @@ const getTrademarkList = async () => {
     ...trademarkResponse.data.records,
   ); //保证响应式
 };
-onMounted(async () => {
+const render = () => {
   getTrademarkList();
+};
+onMounted(async () => {
+  render();
 });
 //切换每页数据数目时
 watch([limit, pageNum], () => {
@@ -49,7 +53,7 @@ watch([limit, pageNum], () => {
   // const changePageNum = (currenPage: number) => {
   //  getTrademarkList()
   // }
-  getTrademarkList();
+  render();
 });
 
 //添加与修改品牌
@@ -131,10 +135,7 @@ const comfirm = async () => {
   if (!checkForm) {
     return;
   }
-  console.log("checkForm", checkForm);
   const result = (await updateTrademark(trademarkItem)) as ResponseDataType;
-  console.log("确认时的trademarkItem", trademarkItem);
-  console.log("确认时的result", result);
   // 成功上传/修改
   if (result.code == 200) {
     ElMessage({
@@ -142,7 +143,7 @@ const comfirm = async () => {
       message: trademarkItem.id ? "修改品牌成功" : "添加品牌成功",
     });
     //再次发请求，获取全部数据
-    await getTrademarkList();
+    await render();
   } else {
     ElMessage({
       type: "error",
@@ -180,6 +181,21 @@ const validatorLogoUrl = (
 const rules = {
   tmName: [{ required: true, trigger: "blur", validator: validatorTmName }],
   logoUrl: [{ required: true, validator: validatorLogoUrl }],
+};
+
+//删除事件
+//气泡确认框确认的回调
+const removeTrademark = async (row: ItemType) => {
+  const id = row.id;
+  const re = await deleteTrademark(id as number);
+  console.log(re);
+  if (re.code === 200) {
+    ElMessage({
+      type: "success",
+      message: "删除成功",
+    });
+    render();
+  }
 };
 </script>
 <template>
@@ -246,6 +262,7 @@ const rules = {
         align="center"
         prop="tmName"
       ></el-table-column>
+
       <el-table-column label="品牌logo" align="center">
         <template #default="scope">
           <!-- scope:{
@@ -265,6 +282,7 @@ const rules = {
           />
         </template>
       </el-table-column>
+
       <el-table-column label="操作" align="center">
         <template #default="{ row }">
           <el-button
@@ -272,10 +290,21 @@ const rules = {
             @click="changeTrademarkItem(row)"
             icon="Edit"
           ></el-button>
-          <el-button type="danger" icon="Delete"> </el-button>
+
+          <!-- 删除的按钮与气泡 -->
+          <el-popconfirm
+            title="删除该品牌？"
+            icon="Delete"
+            @confirm="removeTrademark(row)"
+          >
+            <template #reference>
+              <el-button type="danger" icon="Delete"></el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
+
     <!-- 分页 -->
     <el-pagination
       v-model:current-page="pageNum"
@@ -295,9 +324,7 @@ const rules = {
   height: 178px;
   display: block;
 }
-</style>
 
-<style>
 .avatar-uploader .el-upload {
   border: 1px dashed var(--el-border-color);
   border-radius: 6px;

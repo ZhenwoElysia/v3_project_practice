@@ -22,11 +22,11 @@ const handleMouseMove = () => {
   const app = createApp(smallEleMent);
   app.mount(el);
 
-  // 1 秒后卸载
+  // 0.5 秒后卸载
   setTimeout(() => {
     app.unmount();
     trailBox.value?.removeChild(el);
-  }, 1000);
+  }, 500);
 };
 onMounted(() => {
   window.addEventListener("mousemove", handleMouseMove);
