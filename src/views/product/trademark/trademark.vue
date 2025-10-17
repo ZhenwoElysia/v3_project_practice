@@ -200,13 +200,7 @@ const removeTrademark = async (row: ItemType) => {
 </script>
 <template>
   <el-card style="width: 90%; height: 95%">
-    <el-button
-      type="primary"
-      size="large"
-      icon="Plus"
-      @click="addNewTrademarkItem"
-      >添加品牌</el-button
-    >
+    <el-button type="primary" size="large" icon="Plus" @click="addNewTrademarkItem">添加品牌</el-button>
     <!-- 添加品牌 -->
     <el-dialog v-model="isDialog">
       <h1>{{ dialogTitle }}</h1>
@@ -217,19 +211,9 @@ const removeTrademark = async (row: ItemType) => {
         <el-form-item label="上传品牌图片" prop="logoUrl">
           <!-- action:图片上传路径，得带/api -->
           <!-- :headers生成请求头，携带token，不然会报207 -->
-          <el-upload
-            class="avatar-uploader"
-            action="/api/admin/product/fileUpload"
-            :headers="{ token: token }"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforePictureUpload"
-          >
-            <img
-              v-if="trademarkItem.logoUrl"
-              :src="trademarkItem.logoUrl"
-              class="avatar"
-            />
+          <el-upload class="avatar-uploader" action="/api/admin/product/fileUpload" :headers="{ token: token }"
+            :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforePictureUpload">
+            <img v-if="trademarkItem.logoUrl" :src="trademarkItem.logoUrl" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon">
               <UploadFilled />
             </el-icon>
@@ -243,25 +227,9 @@ const removeTrademark = async (row: ItemType) => {
     </el-dialog>
 
     <!-- 显示品牌 -->
-    <el-table
-      :data="trademarkList"
-      border
-      stripe
-      height="700"
-      :row-style="{ height: '220px' }"
-    >
-      <el-table-column
-        label="序号"
-        align="center"
-        width="80px"
-        prop="id"
-        type="index"
-      ></el-table-column>
-      <el-table-column
-        label="品牌名称"
-        align="center"
-        prop="tmName"
-      ></el-table-column>
+    <el-table :data="trademarkList" border stripe height="700" :row-style="{ height: '220px' }">
+      <el-table-column label="序号" align="center" width="80px" prop="id" type="index"></el-table-column>
+      <el-table-column label="品牌名称" align="center" prop="tmName"></el-table-column>
 
       <el-table-column label="品牌logo" align="center">
         <template #default="scope">
@@ -270,33 +238,21 @@ const removeTrademark = async (row: ItemType) => {
               column: TableColumnCtx<TradeMarkItemType>
               $index: number//对应数组的索引值
           } -->
-          <img
-            :src="scope.row.logoUrl"
-            alt="logo"
-            style="
+          <img :src="scope.row.logoUrl" alt="logo" style="
               margin: 0 auto;
               width: 80px;
               height: 40px;
               object-fit: contain;
-            "
-          />
+            " />
         </template>
       </el-table-column>
 
       <el-table-column label="操作" align="center">
         <template #default="{ row }">
-          <el-button
-            type="warning"
-            @click="changeTrademarkItem(row)"
-            icon="Edit"
-          ></el-button>
+          <el-button type="warning" @click="changeTrademarkItem(row)" icon="Edit"></el-button>
 
           <!-- 删除的按钮与气泡 -->
-          <el-popconfirm
-            title="删除该品牌？"
-            icon="Delete"
-            @confirm="removeTrademark(row)"
-          >
+          <el-popconfirm title="删除该品牌？" icon="Delete" @confirm="removeTrademark(row)">
             <template #reference>
               <el-button type="danger" icon="Delete"></el-button>
             </template>
@@ -306,15 +262,9 @@ const removeTrademark = async (row: ItemType) => {
     </el-table>
 
     <!-- 分页 -->
-    <el-pagination
-      v-model:current-page="pageNum"
-      v-model:page-size="limit"
-      :default-page-size="4"
-      :page-sizes="[2, 3, 4, 5]"
-      :background="false"
-      layout=" prev, pager, next, jumper,->, total, sizes,"
-      :total="allDatas.length"
-    />
+    <el-pagination v-model:current-page="pageNum" v-model:page-size="limit" :default-page-size="4"
+      :page-sizes="[2, 3, 4, 5]" :background="false" layout=" prev, pager, next, jumper,->, total, sizes,"
+      :total="allDatas.length" />
   </el-card>
 </template>
 
