@@ -20,7 +20,7 @@ export const reqCategory3 = (id: number) => {
 };
 export const reqAttrInfoList = (id1: number, id2: number, id3: number) => {
   return http.get<object, ResponseDataType>(
-    API.GET_ATTR_INFO_LIST + "/" + id1 + "/" + id2 + "/" + id3
+    API.GET_ATTR_INFO_LIST + "/" + id1 + "/" + id2 + "/" + id3,
   );
 };
 export const reqAddAttrInfo = () => {

@@ -11,7 +11,7 @@ import type { AttrListType } from "@/api/product/attr/type";
 import { ElMessage } from "element-plus";
 import { onMounted, ref } from "vue";
 
-let attrInfoList = ref()
+let attrInfoList = ref();
 //分类
 let category1Selection = ref();
 let category1OptionList = ref();
@@ -98,15 +98,13 @@ const getProAttr = async () => {
       category3Selection.value,
     );
 
-    attrInfoList.value = infoListRes.data as AttrListType
-    console.log('attrInfoList', attrInfoList);
+    attrInfoList.value = infoListRes.data as AttrListType;
+    console.log("attrInfoList", attrInfoList);
   }
 };
 
 //添加属性
-const addNewAttr = () => {
-
-};
+const addNewAttr = () => {};
 </script>
 
 <template>
@@ -116,30 +114,61 @@ const addNewAttr = () => {
       <!-- 一级分类 -->
       <div class="category">
         <span class="category-title">一级分类：</span>
-        <el-select v-model="category1Selection" @change="get2nd" placeholder="请选择一级分类">
-          <el-option v-for="item in category1OptionList" :label="item.name" :key="item.id" :value="item.id"></el-option>
+        <el-select
+          v-model="category1Selection"
+          @change="get2nd"
+          placeholder="请选择一级分类"
+        >
+          <el-option
+            v-for="item in category1OptionList"
+            :label="item.name"
+            :key="item.id"
+            :value="item.id"
+          ></el-option>
         </el-select>
       </div>
 
       <!-- 二级分类 -->
       <div class="category">
         <span class="category-title">二级分类：</span>
-        <el-select v-model="category2Selection" @change="get3nd" :disabled="isC2Dsiabled" :placeholder="category1Selection ? '请选择二级分类' : '请选择一级分类'
-          ">
-          <el-option v-for="item in category2OptionList" :label="item.name" :key="item.id" :value="item.id"></el-option>
+        <el-select
+          v-model="category2Selection"
+          @change="get3nd"
+          :disabled="isC2Dsiabled"
+          :placeholder="
+            category1Selection ? '请选择二级分类' : '请选择一级分类'
+          "
+        >
+          <el-option
+            v-for="item in category2OptionList"
+            :label="item.name"
+            :key="item.id"
+            :value="item.id"
+          ></el-option>
         </el-select>
       </div>
 
       <!-- 三级分类 -->
       <div class="category">
         <span class="category-title">三级分类：</span>
-        <el-select v-model="category3Selection" @change="getProAttr" :disabled="isC3Dsiabled" :placeholder="category2Selection
-          ? '请选择三级分类'
-          : category1Selection
-            ? '请选择二级分类'
-            : '请选择一级分类'
-          ">
-          <el-option v-for="item in category3OptionList" :label="item.name" :key="item.id" :value="item.id"></el-option>
+        <el-select
+          v-model="category3Selection"
+          @change="getProAttr"
+          :disabled="isC3Dsiabled"
+          :placeholder="
+            category2Selection
+              ? '请选择三级分类'
+              : category1Selection
+                ? '请选择二级分类'
+                : '请选择一级分类'
+          "
+        >
+          <el-option
+            v-for="item in category3OptionList"
+            :label="item.name"
+            :key="item.id"
+            :value="item.id"
+          ></el-option>
         </el-select>
       </div>
     </div>
@@ -148,9 +177,19 @@ const addNewAttr = () => {
   <!-- 展示 -->
   <el-card style="max-width: 95%; height: 75vh">
     <el-button @click="addNewAttr" type="primary">添加属性</el-button>
-    <el-table :data="attrInfoList" stripe border style="margin: 1vh 0;">
-      <el-table-column label="序号" width="60px" type="index" align="center"></el-table-column>
-      <el-table-column label="属性名称" width="100px" prop="attrName" align="center"></el-table-column>
+    <el-table :data="attrInfoList" stripe border style="margin: 1vh 0">
+      <el-table-column
+        label="序号"
+        width="60px"
+        type="index"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        label="属性名称"
+        width="100px"
+        prop="attrName"
+        align="center"
+      ></el-table-column>
       <el-table-column label="属性值名称"></el-table-column>
       <el-table-column label="操作" width="150px">
         <el-button type="warning" icon="Edit"></el-button>
